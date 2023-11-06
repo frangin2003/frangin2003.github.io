@@ -65,6 +65,9 @@ $(function () {
 
       $("#button-1-clear").click(() => {
         $TEXTAREA_1.html("");
+        TERMS_BY_ID.clear();
+        TEXT_PLACEHOLDER.clear();
+        TEXT_NORMAL.clear();
         keyupProtect();
       });
       $("#button-3-clear").click(() => {
