@@ -191,7 +191,7 @@ const strategies = [
   },
   {
     name: "AccountNumber",
-    match: (term) => /^\d+(-\d+)+$/.test(term.text),
+    match: (term) => (/^\d+(-\d+)+$/.test(term.text) || /^\d{5,}$/.test(term.text)),
     execute: (term) => {
       term.backgroundColor = "#ADD8E6"; // Pastel blue
       term.placeholder = faker.finance.accountNumber();

@@ -15,8 +15,8 @@ var SAMPLE_TEXT = `Subject: [Confidential] Project Orion Update, Q4 Financials, 
     Finance Team (FIN-OPS) has also finalized the budget for Q4. We're looking at a revenue of $10 million and an expenditure of $4 million. The EBITDA for this quarter is expected to be around $6 million.
 
     Social Security Numbers for new hires:
-    - Sarah Johnson: 123-45-6789
-    - Mark Williams: 987-65-4321
+    - Sarah Johnson: 123456789
+    - Mark Williams: 987654321
 
     Upcoming important dates:
     - ClientCorp meeting: October 15, 2023
