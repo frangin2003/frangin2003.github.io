@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Anonimize your prompt before sending it to AI vendors"
+    />
+    <title>WordWardAI</title>
+    <style>
+      body {
+        height: 100%;
+        font-family: Arial, sans-serif;
+        font-size: small;
+        /* cursor: url('magic-wand.png'), auto; */
+        /* Replace 'magic-wand.png' with the path to your cursor image */
+        overflow-x: hidden;
+        --mouse-x: 0;
+        --mouse-y: 0;
+      }
+
+      /* body * {
+          transition: all 1s ease !important;
+        } */
+
+      .body-day {
+        background: radial-gradient(
+          ellipse at bottom,
+          #ccfaff 0%,
+          #2678a6 100%
+        );
+      }
+
+      .body-night {
+        background: radial-gradient(
+          ellipse at bottom,
+          #1b2735 0%,
+          #090a0f 100%
+        );
+      }
+    </style>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="static/js/libs/jquery-ui-1.13.2.custom/jquery-ui.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="static/js/parallax-star-background/index.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="static/js/input-toggle-day-night/index.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="static/js/textarea-editable/index.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="static/js/mouse-pointer/index.css"
+    />
+
+    <script
+      defer="defer"
+      src="static/js/libs/code.jquery.com_jquery-3.7.1.js"
+    ></script>
+    <script
+      defer="defer"
+      src="static/js/libs/jquery-ui-1.13.2.custom/jquery-ui.min.js"
+    ></script>
+    <script
+      defer="defer"
+      src="static/js/libs/unpkg.com_compromise@14.10.0_builds_compromise.js"
+    ></script>
+    <script
+      defer="defer"
+      src="static/js/libs/unpkg.com_compromise-dates@3.4.2_builds_compromise-dates.min.js"
+    ></script>
+    <script
+      defer="defer"
+      src="static/js/libs/cdn.jsdelivr.net_npm_luxon@3.4.3_build_global_luxon.min.js"
+    ></script>
+    <script
+      defer="defer"
+      src="static/js/libs/cdn.jsdelivr.net_npm_fuse.js_dist_fuse.js"
+    ></script>
+    <script defer="defer" src="static/js/libs/font-awesome-kit.js"></script>
+
+    <script
+      defer="defer"
+      src="static/js/parallax-star-background/index.js"
+    ></script>
+    <script
+      defer="defer"
+      src="static/js/input-toggle-day-night/index.js"
+    ></script>
+    <script
+      defer="defer"
+      src="static/js/textarea-editable/jquery.toTextarea.js"
+    ></script>
+
+    <script type="module">
+      import { faker } from "https://cdn.skypack.dev/@faker-js/faker";
+      window.faker = faker;
+    </script>
+
+    <script defer="defer" src="static/js/const.js"></script>
+    <script defer="defer" src="static/js/dateformat.js"></script>
+    <script defer="defer" src="static/js/detect-currency.js"></script>
+    <script defer="defer" src="static/js/term-processor.js"></script>
+    <script defer="defer" src="static/js/detect-currency.js"></script>
+    <script defer="defer" src="static/js/word-edit-dialog.js"></script>
+
+    <script defer="defer" src="static/js/sample-text.js"></script>
+
+    <script defer="defer" src="static/js/main.js"></script>
+  </head>
+
+  <body id="ainonymous-default-popup" class="body-night">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <div class="sky"></div>
+
+    <div id="input-toggle-day-night-target"></div>
+
+    <div style="height: 30px"></div>
+
+    <div id="textarea-left-and-right">
+      <div class="left">
+        <div class="textarea-header">
+          <span id="title-1"
+            >1. Paste here the text to anonimize, then edit it</span
+          >
+          <span id="title-3" style="display: none"
+            >3. Paste here the response from your AI chat</span
+          >
+          <a id="click-example-1" href="#" style="color: #007bff"
+            >Click for an example</a
+          >
+          <button
+            id="button-1-clear"
+            contenteditable="false"
+            title="Clear the text"
+          >
+            <i class="fa fa-circle-xmark"></i>
+          </button>
+          <button
+            id="button-3-clear"
+            style="display: none"
+            contenteditable="false"
+            title="Clear the text"
+          >
+            <i class="fa fa-circle-xmark"></i>
+          </button>
+        </div>
+        <div
+          id="textarea-1"
+          class="textarea-common textarea-night textarea-night-left"
+        ></div>
+        <div
+          id="textarea-3"
+          class="textarea-common textarea-day textarea-day-left"
+          style="display: none"
+        ></div>
+      </div>
+      <div class="right">
+        <div class="textarea-header">
+          <span id="title-2">2. Copy this anonimized text to your AI chat</span>
+          <span id="title-4" style="display: none"
+            >4. Copy the desanonimized response</span
+          >
+          <button
+            id="button-2-copy"
+            contenteditable="false"
+            title="Copy the anonimized text to the clipboard"
+          >
+            <i class="fa fa-clone"></i>
+          </button>
+          <button
+            id="button-4-copy"
+            style="display: none"
+            contenteditable="false"
+            title="Copy the desanonimized text to the clipboard"
+          >
+            <i class="fa fa-clone"></i>
+          </button>
+        </div>
+        <div
+          id="textarea-2"
+          class="textarea-common textarea-night textarea-night-right"
+        ></div>
+        <div
+          id="textarea-4"
+          class="textarea-common textarea-day textarea-day-right"
+          style="display: none"
+        ></div>
+      </div>
+    </div>
+
+    <div style="clear: both"></div>
+
+    <!-- <pre id="messages" style="color: #fff; font-size: small;"></pre> -->
+
+    <div id="editDialog" title="Edit" style="display: none">
+      <span id="editSentence"></span>
+      <p>
+        <label>Original:</label>
+        <span id="editOriginalValue" style="font-weight: bold"></span>
+      </p>
+      <input
+        type="text"
+        id="editNewWord"
+        placeholder="New word"
+        value=""
+        style="margin-bottom: 20px; width: 100%"
+      />
+      <div style="display: flex; justify-content: center">
+        <button id="editSave">Save</button>
+      </div>
+    </div>
+  </body>
+</html>
