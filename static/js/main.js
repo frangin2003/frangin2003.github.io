@@ -67,7 +67,7 @@ $(function () {
         $TEXTAREA_1.html("");
         TERMS_BY_ID.clear();
         TEXT_PLACEHOLDER.clear();
-        TEXT_NORMAL.clear();
+        TEXT_NORMAL = new Map();
         keyupProtect();
       });
       $("#button-3-clear").click(() => {

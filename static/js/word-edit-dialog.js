@@ -16,6 +16,10 @@ const showEditWord = (termId, idPrefix) => {
             placeholder: term.placeholder,
             backgroundColor: term.backgroundColor
         });
+        TEXT_NORMAL.set(term.placeholder, {
+            text: term.text,
+            backgroundColor: term.backgroundColor
+        });
         $EDIT_DIALOG.dialog("close");
         keyupProtect();
     });
