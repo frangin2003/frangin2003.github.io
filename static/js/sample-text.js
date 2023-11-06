@@ -1,5 +1,4 @@
-var SAMPLE_TEXT = `$2,222.453 $25 £56 123,12€
-            Subject: [Confidential] Project Orion Update, Q4 Financials, and Global Expansion - 2018-01-01T20:09:00
+var SAMPLE_TEXT = `Subject: [Confidential] Project Orion Update, Q4 Financials, and Global Expansion - 2018-01-01T20:09:00
 
     Dear Team,
 
