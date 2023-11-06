@@ -46,10 +46,12 @@ const strategies = [
     match: (term) => /^Q[1-4]$/i.test(term.text),
     execute: (term) => {
       term.backgroundColor = "#FFFFE0"; // Pastel yellow
-      const quarters = ["Q1", "Q2", "Q3", "Q4"].filter(
-        (q) => q.toLowerCase() !== term.text.toLowerCase()
+      const quarters = ["Q1", "Q2", "Q3", "Q4"];
+      const currentQuarterIndex = quarters.findIndex(
+        (q) => q.toLowerCase() === term.text.toLowerCase()
       );
-      term.placeholder = quarters[Math.floor(Math.random() * quarters.length)];
+      const nextQuarterIndex = (currentQuarterIndex + 1) % quarters.length;
+      term.placeholder = quarters[nextQuarterIndex];
     },
   },
   {
